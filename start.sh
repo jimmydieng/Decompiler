@@ -16,7 +16,7 @@ TMPDIR=tmp
 # 1. apk -> AndroidManifest.xml smali res
 #
 echo java -jar $APKTOOL d $APKFILE $OUTPUTDIR
-java -jar $APKTOOL d $APKFILE $OUTPUTDIR
+java -jar $APKTOOL d $OUTPUTDIR $APKFILE
 
 #
 # 2. apk -> zip
@@ -36,7 +36,11 @@ jar xvf classes.jar
 # 
 # 4. classes/ -> src/
 # 
-$JAD -s java -d ../src -r ./**/*.class
+classes=`find . -type f -name "*.class"`
+for i in $classes; do
+    $JAD -s java -d ../src -r $i
+done
+# $JAD -s java -d ../src -r ./**/*.class
 cd -
 
 mv $TMPDIR/src $OUTPUTDIR/
