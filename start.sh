@@ -1,4 +1,4 @@
-    #!/bin/sh
+#!/bin/sh
 
 if [ $# -lt 1 ]; then
   echo "usage: [apk file]"
